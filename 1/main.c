@@ -17,16 +17,96 @@
 //   return 0;
 // }
 
+// #include <stdio.h>
+//
+// #define LOWER 0
+// #define UPPER 300
+// #define STEP 20
+//
+// int main() {
+//   int fahr;
+//   for (fahr = UPPER; fahr >= LOWER; fahr -= STEP) {
+//     printf("%d\t%6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32.0));
+//   }
+//   return 0;
+// }
+
+// print EOF value
+//  #include <stdio.h>
+//
+//  int main() {
+//    int x = EOF;
+//    printf("%d", x);
+//    return 0;
+//  }
+//
+
+// #include <stdio.h>
+//
+// int main() {
+//   long nc;
+//
+//   nc = 0;
+//
+//   while (getchar() != EOF) {
+//     ++nc;
+//   }
+//
+//   printf("%ld\n", nc);
+//
+//   return 0;
+// }
+
+// #include <stdio.h>
+//
+// int main() {
+//   double nc;
+//
+//   for (nc = 0; getchar() != EOF; ++nc)
+//     ;
+//
+//   printf("%0.f\n", nc);
+//
+//   return 0;
+// }
+
+// exercise 1.8
+//  #include <stdio.h>
+//
+//  int main() {
+//    int newline, tab, blankspace, c;
+//
+//    newline = tab = blankspace = 0;
+//
+//    while ((c = getchar()) != EOF) {
+//      if (c == '\n')
+//        ++newline;
+//      if (c == '\t')
+//        ++tab;
+//      if (c == ' ')
+//        ++blankspace;
+//    }
+//
+//    printf("newline: %d,tab: %d,blankspace: %d", newline, tab, blankspace);
+//    return 0;
+//  }
+
+// exercise 1.9
+
 #include <stdio.h>
 
-#define LOWER 0
-#define UPPER 300
-#define STEP 20
-
 int main() {
-  int fahr;
-  for (fahr = UPPER; fahr >= LOWER; fahr -= STEP) {
-    printf("%d\t%6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32.0));
+  int c;
+  while ((c = getchar()) != EOF) {
+    if (c == ' ') {
+      // first space we print
+      putchar(c);
+      // the next one we just do nothing
+      while ((c = getchar()) == ' ')
+        ;
+    }
+    putchar(c);
   }
+
   return 0;
 }
