@@ -93,20 +93,58 @@
 
 // exercise 1.9
 
+// #include <stdio.h>
+//
+// int main() {
+//   int c;
+//   while ((c = getchar()) != EOF) {
+//     if (c == ' ') {
+//       // first space we print
+//       putchar(c);
+//       // the next one we just do nothing
+//       while ((c = getchar()) == ' ')
+//         ;
+//     }
+//     putchar(c);
+//   }
+//
+//   return 0;
+// }
+
+// #include <stdio.h>
+//
+// int main() {
+//   int in_blank = 0;
+//   int c;
+//
+//   while ((c = getchar()) != EOF) {
+//     if (c == ' ' && in_blank)
+//       continue;
+//     if (c == ' ') {
+//       in_blank = 1;
+//     } else {
+//       in_blank = 0;
+//     }
+//     putchar(c);
+//   }
+//
+//   return 0;
+// }
+
 #include <stdio.h>
 
 int main() {
   int c;
-  while ((c = getchar()) != EOF) {
-    if (c == ' ') {
-      // first space we print
-      putchar(c);
-      // the next one we just do nothing
-      while ((c = getchar()) == ' ')
-        ;
-    }
-    putchar(c);
-  }
 
-  return 0;
+  while ((c = getchar()) != EOF) {
+    if (c == '\t') {
+      putchar('\t');
+    } else if (c == '\b') {
+      putchar('\b');
+    } else if (c == '\\') {
+      putchar('\\');
+    } else {
+      putchar(c);
+    }
+  }
 }
