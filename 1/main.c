@@ -259,75 +259,215 @@
 
 // 1-13
 //
+// #include <stdio.h>
+//
+// #define MAXWORDLENGTH 10
+//
+// #define IN 1
+// #define OUT 0
+//
+// int main() {
+//   int words_length_frequency[MAXWORDLENGTH];
+//   int i, c, len, overflow, state;
+//
+//   // for the histogram
+//   int max = 0;
+//
+//   len = overflow = 0;
+//
+//   // idk what is this state used for (not looking solution yet, just follow
+//   from
+//   // example)
+//   state = OUT;
+//
+//   // initialize element value in the array
+//   for (i = 0; i < MAXWORDLENGTH; ++i) {
+//     words_length_frequency[i] = 0;
+//   }
+//
+//   // increase the value
+//   while ((c = getchar()) != EOF) {
+//     if (len > MAXWORDLENGTH) {
+//       ++overflow;
+//     } else if (c == '\t' || c == '\n' || c == ' ') {
+//       ++words_length_frequency[len];
+//       len = 0;
+//       state = OUT;
+//     } else {
+//       ++len;
+//     }
+//   }
+//
+//   // find max frequency from the array that has been filled
+//   // going to be used for the histogram
+//   for (i = 0; i < MAXWORDLENGTH; ++i) {
+//     if (words_length_frequency[i] > max) {
+//       max = words_length_frequency[i];
+//     }
+//   }
+//
+//   // histogram
+//   for (i = max; i > 0; --i) {
+//     for (int j = 0; j < MAXWORDLENGTH; ++j) {
+//       if (words_length_frequency[j] >= i) {
+//         printf("x ");
+//       } else {
+//         printf("  ");
+//       }
+//     }
+//     printf("\n");
+//   }
+//
+//   // 10 actually can use MAXWORDLENGTH
+//   for (i = 0; i < 10; ++i) {
+//     printf("%d ", words_length_frequency[i]);
+//   }
+//   printf("\n");
+//
+//   for (i = 0; i < 10; ++i) {
+//     printf("%d ", i);
+//   }
+//   printf("\n");
+//
+//   printf("Overflow: %d\n", overflow);
+//
+//   return 0;
+// }
+
+// 1-13 MODEL solution
+// #include <stdio.h>
+//
+// #define MAXHIST 15
+// #define MAXWORD 11
+// #define IN 1
+// #define OUT 0
+//
+// int main() {
+//   int c, i, nc, state;
+//   int len;
+//   int maxvalue;
+//   int ovflow;
+//   int wl[MAXWORD];
+//
+//   state = OUT;
+//   nc = 0;
+//   ovflow = 0;
+//
+//   for (i = 0; i < MAXWORD; ++i) {
+//     wl[i] = 0;
+//   }
+//
+//   // increase the frequency for the element in the array
+//   while ((c = getchar()) != EOF) {
+//     if (c == ' ' || c == '\t' || c == '\n') {
+//       state = OUT;
+//       if (nc > 0) {
+//         if (nc < MAXWORD) {
+//           ++wl[nc];
+//         } else {
+//           ++ovflow;
+//         }
+//       }
+//       nc = 0;
+//     } else if (state == OUT) {
+//       state = IN;
+//       nc = 1;
+//     } else {
+//       ++nc;
+//     }
+//   }
+//
+//
+//   maxvalue = 0;
+//   for (i = 1; i < MAXWORD; ++i) {
+//     if (wl[i] > maxvalue) {
+//       maxvalue = wl[i];
+//     }
+//   }
+//
+//   for (i = 1; i < MAXWORD; ++i) {
+//     printf("%5d - %5d : ", i, wl[i]);
+//     if (wl[i] > 0) {
+//       if ((len = wl[i] * MAXHIST / maxvalue) <= 0)
+//         len = 1;
+//     } else {
+//       len = 0;
+//     }
+//     while (len > 0) {
+//       putchar('*');
+//       --len;
+//     }
+//     putchar('\n');
+//   }
+//   if (ovflow > 0)
+//     printf("There are %d words >= %d\n", ovflow, MAXWORD);
+//
+//   return 0;
+// }
+
+// 1-14
+// #include <stdio.h>
+
+// int main(){
+// return 0;
+// }
+// skip
+//
+
+// 1-15 skip
+//
+// 1-19
+
 #include <stdio.h>
+#define MAXLENGTH 1000
 
-#define MAXWORDLENGTH 10
-
-#define IN 1
-#define OUT 0
+int get_line(char s[], int max_length);
+void reverse_string(char s[], int i, int j);
 
 int main() {
-  int words_length_frequency[MAXWORDLENGTH];
-  int i, c, len, overflow, state;
+  // get the string
+  // reverse the string
+  //
+  char line[MAXLENGTH];
+  int len = 0;
+  int start = 0;
 
-  // for the histogram
-  int max = 0;
+  len = get_line(line, MAXLENGTH);
+  printf("%d", len);
 
-  len = overflow = 0;
+  // dont forget \n and \0
+  reverse_string(line, start, len - 1);
 
-  // idk what is this state used for (not looking solution yet, just follow from
-  // example)
-  state = OUT;
-
-  // initialize element value in the array
-  for (i = 0; i < MAXWORDLENGTH; ++i) {
-    words_length_frequency[i] = 0;
-  }
-
-  // increase the value
-  while ((c = getchar()) != EOF) {
-    if (len > MAXWORDLENGTH) {
-      ++overflow;
-    } else if (c == '\t' || c == '\n' || c == ' ') {
-      ++words_length_frequency[len];
-      len = 0;
-      state = OUT;
-    } else {
-      ++len;
-    }
-  }
-
-  // find max frequency from the array that has been filled
-  // going to be used for the histogram
-  for (i = 0; i < MAXWORDLENGTH; ++i) {
-    if (words_length_frequency[i] > max) {
-      max = words_length_frequency[i];
-    }
-  }
-
-  // histogram
-  for (i = max; i > 0; --i) {
-    for (int j = 0; j < MAXWORDLENGTH; ++j) {
-      if (words_length_frequency[j] >= i) {
-        printf("x ");
-      } else {
-        printf("  ");
-      }
-    }
-    printf("\n");
-  }
-
-  // 10 actually can use MAXWORDLENGTH
-  for (i = 0; i < 10; ++i) {
-    printf("%d ", words_length_frequency[i]);
-  }
-  printf("\n");
-  for (i = 0; i < 10; ++i) {
-    printf("%d ", i);
-  }
-  printf("\n");
-
-  printf("Overflow: %d\n", overflow);
+  printf("%s", line);
 
   return 0;
+}
+
+// will fill s array and return length of the inputted line
+int get_line(char s[], int max_length) {
+  // i for counting the line length
+  int i, c, j;
+  j = 0;
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i) {
+    if (i < max_length - 2)
+      s[j++] = c;
+  }
+  if (c == '\n') {
+    s[j++] = c;
+    ++i;
+  }
+  s[j] = '\0';
+
+  return i;
+}
+
+void reverse_string(char s[], int i, int j) {
+  char temp;
+  while (i < j) {
+    temp = s[i];
+    s[i] = s[j];
+    s[j] = temp;
+    ++i;
+    --j;
+  }
 }
